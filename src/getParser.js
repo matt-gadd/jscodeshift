@@ -9,6 +9,28 @@
  */
 
 'use strict';
+const plugins = [
+	'typescript',
+	'asyncFunctions',
+	'asyncGenerators',
+	'classConstructorCall',
+	'classProperties',
+	'decorators-legacy',
+	'doExpressions',
+	'exponentiationOperator',
+	'exportExtensions',
+	'functionBind',
+	'functionSent',
+	'objectRestSpread',
+	'trailingFunctionCommas',
+	'dynamicImport',
+	'numericSeparator',
+	'optionalChaining',
+	'importMeta',
+	'classPrivateProperties',
+	'bigInt',
+	'optionalCatchBinding'
+]
 
 module.exports = function getParser(parserName) {
   switch (parserName) {
@@ -16,36 +38,22 @@ module.exports = function getParser(parserName) {
       return require('../parser/babylon');
     case 'flow':
       return require('../parser/flow');
-  case 'typescript':
-      const babylon = require('babylon');
-      const options = {
+    case 'typescript':
+      var babylon = require('babylon');
+      var options = {
         sourceType: 'module',
         allowImportExportEverywhere: true,
         allowReturnOutsideFunction: true,
-        plugins: [
-          'typescript',
-          'jsx',
-          "asyncFunctions",
-          "asyncGenerators",
-          "classConstructorCall",
-          "classProperties",
-          "decorators",
-          "doExpressions",
-          "exponentiationOperator",
-          "exportExtensions",
-          "functionBind",
-          "functionSent",
-          "objectRestSpread",
-          "trailingFunctionCommas",
-          "dynamicImport",
-          "numericSeparator",
-          "optionalChaining",
-          "importMeta",
-          "classPrivateProperties",
-          "bigInt",
-          "optionalCatchBinding",
-          "nullishCoalescingOperator"
-        ]
+        plugins: plugins
+      };
+      return { parse: (code) => babylon.parse(code, options) };
+    case 'typescript-jsx':
+      var babylon = require('babylon');
+      var options = {
+        sourceType: 'module',
+        allowImportExportEverywhere: true,
+        allowReturnOutsideFunction: true,
+        plugins: [ 'jsx', ...plugins ]
       };
       return { parse: (code) => babylon.parse(code, options) };
     case 'babel':
