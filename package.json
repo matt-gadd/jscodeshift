@@ -1,12 +1,12 @@
 {
-  "name": "jscodeshift",
+  "name": "jscodeshift-ts",
   "version": "0.5.1",
   "description": "A toolkit for JavaScript codemods",
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/jscodeshift.git"
+    "url": "https://github.com/matt-gadd/jscodeshift.git"
   },
-  "bugs": "https://github.com/facebook/jscodeshift/issues",
+  "bugs": "https://github.com/matt-gadd/jscodeshift/issues",
   "main": "index.js",
   "scripts": {
     "prepublish": "cp -R src/ dist/",
